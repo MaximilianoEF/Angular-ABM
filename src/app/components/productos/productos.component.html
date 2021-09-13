@@ -1,0 +1,81 @@
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card text-center">
+                <div *ngIf="!isEditar" class="card-body">
+                    <span class="h3">Agregar un Producto</span>
+                    <form class="mt-4" [formGroup]="createProducto" (ngSubmit)="agregarProducto()">
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" class="form-control form-control-lg" placeholder="Identificador" formControlName="id">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control form-control-lg" placeholder="Nombre" formControlName="nombre">
+                            </div>
+                        </div>
+                        <input type="text" class="form-control form-control-lg mt-3" placeholder="Descripcion Corta" formControlName="descripcionCorta">
+                        <input type="text" class="form-control form-control-lg mt-3" placeholder="Descripcion Larga" formControlName="descripcionLarga">
+                        <input type="number" class="form-control form-control-lg mt-3" placeholder="Precio Unitario" formControlName="precioUnitario">
+                        <div class="mt-3">
+                            <button type="text" class="btn btn-secondary btn-lg mr-3" routerLink="/inicio">Volver</button>
+                            <button type="submit" class="btn btn-dark btn-lg">Agregar</button>
+                        </div>
+                    </form>
+                </div>
+                <div *ngIf="isEditar" class="card-body">
+                    <span class="h3">Editar un Producto</span>
+                    <form class="mt-4" [formGroup]="createProducto" (ngSubmit)="agregarEditProducto()">
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" class="form-control form-control-lg" placeholder="Identificador" formControlName="id">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control form-control-lg" placeholder="Nombre" formControlName="nombre">
+                            </div>
+                        </div>
+                        <input type="text" class="form-control form-control-lg mt-3" placeholder="Descripcion Corta" formControlName="descripcionCorta">
+                        <input type="text" class="form-control form-control-lg mt-3" placeholder="Descripcion Larga" formControlName="descripcionLarga">
+                        <input type="number" class="form-control form-control-lg mt-3" placeholder="Precio Unitario" formControlName="precioUnitario">
+                        <div class="mt-3">
+                            <button type="text" class="btn btn-secondary btn-lg mr-3" routerLink="/inicio">Volver</button>
+                            <button type="submit" class="btn btn-dark btn-lg">Editar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <span class="h3">Lista de Productos</span>
+            <table *ngIf="productos.length > 0" class="table table-striped mt-5">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Descripcion Corta</th>
+                    <th>Descripcion Larga</th>
+                    <th>Precio unitario</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let producto of productos">
+                    <td>{{producto.id}}</td>
+                    <td>{{producto.nombre}}</td>
+                    <td>{{producto.descripcionCorta}}</td>
+                    <td>{{producto.descripcionLarga}}</td>
+                    <td>{{producto.precioUnitario | currency}}</td>
+                    <td>
+                        <i class="fas fa-user-edit fa-lg text-info mr-2" (click)="editar(producto.id)"></i>
+                        <i class="far fa-trash-alt fa-lg text-danger" (click)="eliminar(producto.id)"></i>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
