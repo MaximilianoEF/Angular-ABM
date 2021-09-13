@@ -1,3 +1,13 @@
-i:hover {
+table {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.pointer:hover {
     cursor: pointer;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
 }

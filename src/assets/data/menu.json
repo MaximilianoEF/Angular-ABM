@@ -1,0 +1,14 @@
+[
+    {
+        "nombre": "Inicio",
+        "redirect": "/dashboard"
+    },
+    {
+        "nombre": "Productos",
+        "redirect": "/dashboard/productos"
+    },
+    {
+        "nombre": "Pedidos",
+        "redirect": "/dashboard/pedidos"
+    }
+]

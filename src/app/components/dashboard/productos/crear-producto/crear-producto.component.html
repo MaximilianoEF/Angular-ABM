@@ -1,0 +1,48 @@
+<div class="container">
+    <mat-toolbar>
+        <span>{{titulo}}</span>
+    </mat-toolbar>
+    <mat-card style="margin-top: 10px;">
+        <form [formGroup]="createProducto" (ngSubmit)="agregar()">
+            <mat-grid-list cols="4" rowHeight="70px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>ID</mat-label>
+                        <input matInput autocomplete="off" formControlName="id">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="3" [rowspan]="5">
+                    <img src="../../../../../assets/img/usuario.png" alt="imagen del usuario" width="250" height="250">
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput autocomplete="off" formControlName="nombre">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Descripcion Corta</mat-label>
+                        <input matInput autocomplete="off" formControlName="descripcionCorta">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Descripcion Larga</mat-label>
+                        <input matInput autocomplete="off" formControlName="descripcionLarga">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="ancho">
+                        <mat-label>Precio Unitario</mat-label>
+                        <input matInput autocomplete="off" formControlName="precioUnitario">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <button type="submit" mat-raised-button [disabled]="createProducto.invalid" color="primary" style="margin-right: 20px;">Aceptar</button>
+                    <button mat-raised-button routerLink="/dashboard/productos">Volver</button>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </form>
+    </mat-card>
+</div>

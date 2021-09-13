@@ -9,6 +9,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { ProductosComponent } from './productos/productos.component';
+import { CrearProductoComponent } from './productos/crear-producto/crear-producto.component';
 
 
 
@@ -18,7 +19,8 @@ import { ProductosComponent } from './productos/productos.component';
     InicioComponent,
     NavbarComponent,
     PedidosComponent,
-    ProductosComponent
+    ProductosComponent,
+    CrearProductoComponent
   ],
   imports: [
     CommonModule,
