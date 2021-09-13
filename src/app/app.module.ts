@@ -9,18 +9,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { ProductosComponent } from './components/productos/productos.component';
-import { PedidosComponent } from './components/pedidos/pedidos.component';
-import { InicioComponent } from './components/inicio/inicio.component';
+import { SharedModule } from './components/shared/shared.module';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    ProductosComponent,
-    PedidosComponent,
-    InicioComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +24,8 @@ import { InicioComponent } from './components/inicio/inicio.component';
     FormsModule,
     HttpClientModule,
     CommonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

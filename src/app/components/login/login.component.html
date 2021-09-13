@@ -1,0 +1,21 @@
+<div class="body">
+    <div class="login">
+        <!-- Con el binding formGroup se enlaza el formulario -->
+        <!-- Como el boton es de tipo 'submit' se ejecutara el metodo (ngSubmit) al hacerle click, y este mismo ejecutara una funcion declarada en el ts -->
+        <mat-spinner class="spinner" diameter="50" *ngIf="loading"></mat-spinner>
+        <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="ingresar()">
+            <img src="../../../assets/img/usuario.png" alt="imagen de login" width="50%">
+            <h1>Login</h1>
+            <mat-form-field class="ancho" appearance="fill">
+                <mat-label>Usuario</mat-label>
+                <input type="text" matInput autocomplete="off" formControlName="usuario"> <!--Con la propiedad formControlName enlazamos el input con los campos declarados en el formGroup -->
+            </mat-form-field>
+            <mat-form-field class="ancho" appearance="fill">
+                <mat-label>Contraseña</mat-label>
+                <input type="password" matInput autocomplete="off" formControlName="contraseña">
+            </mat-form-field>
+            <br>
+            <button type="submit" mat-raised-button color="primary" class="ancho boton" [disabled]="form.invalid">Ingresar</button>
+        </form>
+    </div>
+</div>
