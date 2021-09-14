@@ -58,7 +58,6 @@ export class ProductosComponent implements OnInit {
   eliminar(id: string){
     if(id !== null){
       this._productoService.deleteProducto(id).subscribe(() => {
-        console.log('Producto eliminado!');
         this.productos = [];
         this.cargarProductos();
         this._snackBar.open('Producto eliminado con exito', 'Aceptar', {

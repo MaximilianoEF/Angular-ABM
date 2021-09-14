@@ -19,6 +19,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -40,7 +41,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     MatGridListModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ],
   exports: [
     MatSliderModule,
@@ -59,7 +61,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     MatGridListModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ] //Para que todos los modulos sean visibles
 })
 export class SharedModule { }

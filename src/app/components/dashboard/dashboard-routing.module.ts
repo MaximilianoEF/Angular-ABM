@@ -5,6 +5,7 @@ import { PedidosComponent } from "./pedidos/pedidos.component";
 import { ProductosComponent } from "./productos/productos.component";
 import { DashboardComponent } from "./dashboard.component";
 import { CrearProductoComponent } from "./productos/crear-producto/crear-producto.component";
+import { CrearPedidosComponent } from "./pedidos/crear-pedidos/crear-pedidos.component";
 
 const routes: Routes = [{
     path: '', component: DashboardComponent, children: [
@@ -18,6 +19,8 @@ const routes: Routes = [{
             path: 'crear-producto', component: CrearProductoComponent
         }, {
             path: 'editar-producto/:id', component: CrearProductoComponent
+        }, {
+            path: 'crear-pedido', component: CrearPedidosComponent
         }
     ]
 }];

@@ -10,6 +10,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { ProductosComponent } from './productos/productos.component';
 import { CrearProductoComponent } from './productos/crear-producto/crear-producto.component';
+import { CrearPedidosComponent } from './pedidos/crear-pedidos/crear-pedidos.component';
+import { DialogDataExampleComponent } from './pedidos/dialog-data-example/dialog-data-example.component';
 
 
 
@@ -20,7 +22,9 @@ import { CrearProductoComponent } from './productos/crear-producto/crear-product
     NavbarComponent,
     PedidosComponent,
     ProductosComponent,
-    CrearProductoComponent
+    CrearProductoComponent,
+    CrearPedidosComponent,
+    DialogDataExampleComponent
   ],
   imports: [
     CommonModule,

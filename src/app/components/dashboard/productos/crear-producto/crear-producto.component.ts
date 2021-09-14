@@ -63,6 +63,7 @@ export class CrearProductoComponent implements OnInit {
       });
     }, err => {
       console.error(err);
+      this.route.navigate(['/dashboard/productos']);
       this._snackBar.open('Error al crear producto', 'Aceptar', {
         duration: 1500,
         horizontalPosition: 'center',

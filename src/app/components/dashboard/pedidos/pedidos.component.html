@@ -1,70 +1,68 @@
 <div class="container">
-    <div class="row">
-        <div class="col-lg-6 offset-lg-3">
-            <div class="card text-center">
-                <div class="card-body">
-                    <span class="h3">Agregar un Pedido</span>
-                    <form class="mt-4" [formGroup]="createPedido" (ngSubmit)="agregarPedido()">
-                        <div class="row">
-                            <div class="col">
-                                <input type="text" class="form-control form-control-lg" placeholder="Direccion" formControlName="direccion">
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control form-control-lg" placeholder="Email" formControlName="email">
-                            </div>
-                        </div>
-                        <input type="text" class="form-control form-control-lg mt-3" placeholder="Telefono" formControlName="telefono">
-                        <input type="text" class="form-control form-control-lg mt-3" placeholder="Horario" formControlName="horario">
-                        <select class="form-control form-control-lg mt-3" formControlName="detalle">
-                            <option selected>Detalle</option>
-                            <option *ngFor="let producto of productos">{{producto.nombre}}</option>
-                        </select>
-                        <input type="number" class="form-control form-control-lg mt-3" placeholder="Cantidad" formControlName="cantidad">
-                        <div class="mt-3">
-                            <button type="text" class="btn btn-secondary btn-lg mr-3" routerLink="/dashboard/inicio">Volver</button>
-                            <button type="submit" class="btn btn-dark btn-lg">Agregar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    <mat-toolbar>
+        <span>Pedidos</span>
+        <span class="example-spacer"></span>
+        <button mat-raised-button color="primary" routerLink="/dashboard/crear-pedido">Agregar</button>
+    </mat-toolbar>
+    <form class="example-container" [formGroup]="fecha" (ngSubmit)="listarPedidos()" style="margin-top: 10px; width: 100%;">
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Buscar por fecha</mat-label>
+            <input matInput placeholder="Formato 'aaaa-mm-dd'" value="" formControlName="fecha">
+        </mat-form-field>
+        <button type="submit" mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+            <mat-icon>search</mat-icon>
+        </button>
+    </form>
+    <div *ngIf="pedidos.length > 0">
+      <mat-form-field appearance="standard">
+        <mat-label>Filtro</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input autocomplete="off">
+      </mat-form-field>
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <!--Puedo iterar en cada elemento a travez de dataSource -->
+          <ng-container matColumnDef="direccion"> <!--La propiedad matHeaderCellDef me define el nombre que tendra la cabeza de cada columna -->
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Direccion </th>
+            <td mat-cell *matCellDef="let element"> {{element.direccion}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="telefono">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefono </th>
+            <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="horario"> <!--Estos nombres hacen ilusion a la columna y tienen que hacer match con el array displayedColumns -->
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Horario </th>
+            <td mat-cell *matCellDef="let element"> {{element.horario}} </td>
+          </ng-container>
 
-<div class="container mt-4">
-    <div class="card">
-        <div class="card-body">
-            <span class="h3">Lista de Pedidos</span>
-            <form class="d-flex" [formGroup]="fecha" (ngSubmit)="listarPedidos()">
-                <input class="form-control mt-3" type="search" placeholder="Buscar por fecha 'aaaa-mm-dd'" formControlName="fecha">
-                <button class="btn btn-outline-success" type="submit">Buscar</button>
-            </form>
-            <table *ngIf="pedidos.length > 0" class="table table-striped mt-5">
-                <thead>
-                  <tr>
-                    <th>Direccion</th>
-                    <th>Email</th>
-                    <th>Telefono</th>
-                    <th>Horario</th>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Total</th>
-                    <th>Estado</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let pedido of pedidos">
-                    <td>{{pedido.direccion}}</td>
-                    <td>{{pedido.email}}</td>
-                    <td>{{pedido.telefono}}</td>
-                    <td>{{pedido.horario}}</td>
-                    <td *ngFor="let detalle of pedido.detalle">{{detalle.nombre}}</td>
-                    <td *ngFor="let detalle of pedido.detalle">{{detalle.cantidad}}</td>
-                    <td>{{pedido.total | currency}}</td>
-                    <td>{{pedido.estado}}</td>
-                  </tr>
-                </tbody>
-            </table>
-        </div>
+          <ng-container matColumnDef="detalle"> 
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Detalle </th>
+            <td mat-cell *matCellDef="let element; let i = index">
+                <button mat-button (click)="openDialog(i)">Ver detalles</button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+            <td mat-cell *matCellDef="let element"> {{element.total | currency}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+            <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      </div>
     </div>
+    <h2 *ngIf="pedidos.length == 0">No hay pedidos para mostrar</h2>
 </div>
