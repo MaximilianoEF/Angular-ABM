@@ -2,14 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Pedido } from 'src/app/models/pedido/pedido.model';
 import { PedidoSend } from 'src/app/models/pedido/pedidoSend.model';
-import { Producto } from 'src/app/models/producto/producto.model';
 import { PedidoService } from 'src/app/service/pedido.service';
-import { ProductoService } from 'src/app/service/producto.service';
 import { DialogDataExampleComponent } from './dialog-data-example/dialog-data-example.component';
 
 @Component({

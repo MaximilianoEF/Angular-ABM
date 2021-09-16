@@ -7,7 +7,7 @@ export class PedidoSend {
   public email: string;
   public telefono: string;
   public horario: string;
-  public detalle: [ProductoPedSend];
+  public detalle: ProductoPedSend[];
   public total: number;
   public descuento: boolean;
   public estado: string;

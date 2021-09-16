@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Pedido } from 'src/app/models/pedido/pedido.model';
 import { Producto } from 'src/app/models/producto/producto.model';
+import { ProductoPed } from 'src/app/models/producto/productoPed.model';
 import { PedidoService } from 'src/app/service/pedido.service';
 import { ProductoService } from 'src/app/service/producto.service';
 
@@ -16,9 +17,13 @@ export class CrearPedidosComponent implements OnInit {
 
   createPedido: FormGroup;
 
+  productosNombre = new FormControl();
+
+  productosCantidad = new FormControl();
+
   productos: Producto[] = [];
 
-  productoNombre: string = '';
+  detalle: ProductoPed[] = [];
 
   constructor(private fb: FormBuilder, private _productoService: ProductoService, private _snackBar: MatSnackBar, private _pedidoService: PedidoService, private route: Router) {
     this.createPedido = this.fb.group({
@@ -26,13 +31,21 @@ export class CrearPedidosComponent implements OnInit {
       email: ['', Validators.required],
       telefono: ['', Validators.required],
       horario: ['', Validators.required],
-      detalle: ['', Validators.required],
-      cantidad: ['', Validators.required]
+      cantidades: this.fb.array([this.fb.group({cantidad: ['', Validators.required]})])
     });
   }
 
   ngOnInit(): void {
     this.traerProductos();
+  }
+
+  get getCantidades() {
+    return this.createPedido.get('cantidades') as FormArray;
+  }
+
+  addCantidad() {
+    const control = <FormArray> this.createPedido.controls['cantidades'];
+    control.push(this.fb.group({cantidad: ['', Validators.required]}));
   }
 
   traerProductos() {
@@ -51,11 +64,15 @@ export class CrearPedidosComponent implements OnInit {
 
   generarDetalle() {
     this.productos.forEach((producto: Producto) => {
-      if(producto.nombre === this.createPedido.value.detalle){
-        this.productoNombre = producto.id;
+      for(let i = 0; i < this.productosNombre.value.length; i++){
+        if(producto.nombre === this.productosNombre.value[i]){
+          this.detalle.push({
+            producto: producto.id,
+            cantidad: this.createPedido.value.cantidades[i].cantidad
+          })
+        }
       }
     });
-
   }
 
   agregarPedido() {
@@ -65,10 +82,7 @@ export class CrearPedidosComponent implements OnInit {
       email: this.createPedido.value.email,
       telefono: this.createPedido.value.telefono,
       horario: this.createPedido.value.horario,
-      detalle: [{
-        producto: this.productoNombre,
-        cantidad: this.createPedido.value.cantidad
-      }]
+      detalle: this.detalle
     }
     this._pedidoService.postPedido(pedido).subscribe(() => {
       this.route.navigate(['/dashboard/pedidos']);

@@ -6,7 +6,7 @@ export class Pedido {
   public email: string;
   public telefono: string;
   public horario: string;
-  public detalle: [ProductoPed];
+  public detalle: ProductoPed[];
 
   constructor(data?: any) {
     if(data && data.fecha) {
